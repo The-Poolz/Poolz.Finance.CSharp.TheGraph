@@ -1,0 +1,41 @@
+name: Publish
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: master
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Pack package and symbols
+      run: |
+        dotnet pack ./src/Poolz.Finance.CSharp.TheGraph/Poolz.Finance.CSharp.TheGraph.csproj \
+          --configuration Release \
+          --output artifacts/ \
+          -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+
+    - name: Push NuGet package and symbols
+      run: |
+        dotnet nuget push artifacts/*.nupkg  \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
+
+        dotnet nuget push artifacts/*.snupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate
