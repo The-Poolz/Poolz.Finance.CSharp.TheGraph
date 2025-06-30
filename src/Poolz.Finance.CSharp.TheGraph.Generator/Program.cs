@@ -2,7 +2,7 @@
 using EnvironmentManager.Extensions;
 using Poolz.Finance.CSharp.TheGraph.Generator;
 
-var url = Env.GRAPHQL_THE_GRAPH_URL.GetRequired();
+var url = Env.GRAPHQL_URL.GetRequired();
 var schema = await GraphQlGenerator.RetrieveSchema(HttpMethod.Post, url);
 var configuration = new GraphQlGeneratorConfiguration
 {

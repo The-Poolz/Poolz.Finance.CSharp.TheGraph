@@ -2,7 +2,7 @@
 
 public enum Env
 {
-    GRAPHQL_THE_GRAPH_URL,
+    GRAPHQL_URL,
     TARGET_NAMESPACE,
     GENERATED_FILE_PATH
 }
