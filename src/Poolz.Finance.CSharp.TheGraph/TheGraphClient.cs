@@ -1126,6 +1126,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string PoolDataOrderBy = "PoolData_orderBy";
         public const string PoolSplitOrderBy = "PoolSplit_orderBy";
         public const string PoolxLockedBalanceOrderBy = "PoolxLockedBalance_orderBy";
+        public const string PoolxUnlocksOrderBy = "PoolxUnlocks_orderBy";
         public const string RedeemedTokensOrderBy = "RedeemedTokens_orderBy";
         public const string RefundProviderUpdateParamsOrderBy = "RefundProviderUpdateParams_orderBy";
         public const string TimedDealProviderFirewallAdminUpdatedOrderBy = "TimedDealProviderFirewallAdminUpdated_orderBy";
@@ -1136,6 +1137,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string TokenStatusFilterOrderBy = "TokenStatusFilter_orderBy";
         public const string TokenWithdrawnOrderBy = "TokenWithdrawn_orderBy";
         public const string TotalInvestedOrderBy = "TotalInvested_orderBy";
+        public const string TotalUnlocksAmountOrderBy = "TotalUnlocksAmount_orderBy";
         public const string TotalUserInvestedOrderBy = "TotalUserInvested_orderBy";
         public const string TransferOrderBy = "Transfer_orderBy";
         public const string UpdatedMaxDelayOrderBy = "UpdatedMaxDelay_orderBy";
@@ -1199,6 +1201,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string PoolData = "PoolData";
         public const string PoolSplit = "PoolSplit";
         public const string PoolxLockedBalance = "PoolxLockedBalance";
+        public const string PoolxUnlocks = "PoolxUnlocks";
         public const string Query = "Query";
         public const string RedeemedTokens = "RedeemedTokens";
         public const string RefundProviderUpdateParams = "RefundProviderUpdateParams";
@@ -1210,6 +1213,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string TokenStatusFilter = "TokenStatusFilter";
         public const string TokenWithdrawn = "TokenWithdrawn";
         public const string TotalInvested = "TotalInvested";
+        public const string TotalUnlocksAmount = "TotalUnlocksAmount";
         public const string TotalUserInvested = "TotalUserInvested";
         public const string Transfer = "Transfer";
         public const string UpdatedMaxDelay = "UpdatedMaxDelay";
@@ -1273,6 +1277,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string PoolDataFilter = "PoolData_filter";
         public const string PoolSplitFilter = "PoolSplit_filter";
         public const string PoolxLockedBalanceFilter = "PoolxLockedBalance_filter";
+        public const string PoolxUnlocksFilter = "PoolxUnlocks_filter";
         public const string RedeemedTokensFilter = "RedeemedTokens_filter";
         public const string RefundProviderUpdateParamsFilter = "RefundProviderUpdateParams_filter";
         public const string TimedDealProviderFirewallAdminUpdatedFilter = "TimedDealProviderFirewallAdminUpdated_filter";
@@ -1283,6 +1288,7 @@ namespace Poolz.Finance.CSharp.TheGraph
         public const string TokenStatusFilterFilter = "TokenStatusFilter_filter";
         public const string TokenWithdrawnFilter = "TokenWithdrawn_filter";
         public const string TotalInvestedFilter = "TotalInvested_filter";
+        public const string TotalUnlocksAmountFilter = "TotalUnlocksAmount_filter";
         public const string TotalUserInvestedFilter = "TotalUserInvested_filter";
         public const string TransferFilter = "Transfer_filter";
         public const string UpdatedMaxDelayFilter = "UpdatedMaxDelay_filter";
@@ -1353,6 +1359,7 @@ namespace Poolz.Finance.CSharp.TheGraph
                 { typeof(PoolDataFilter), "PoolData_filter" },
                 { typeof(PoolSplitFilter), "PoolSplit_filter" },
                 { typeof(PoolxLockedBalanceFilter), "PoolxLockedBalance_filter" },
+                { typeof(PoolxUnlocksFilter), "PoolxUnlocks_filter" },
                 { typeof(RedeemedTokensFilter), "RedeemedTokens_filter" },
                 { typeof(RefundProviderUpdateParamsFilter), "RefundProviderUpdateParams_filter" },
                 { typeof(TimedDealProviderFirewallAdminUpdatedFilter), "TimedDealProviderFirewallAdminUpdated_filter" },
@@ -1363,6 +1370,7 @@ namespace Poolz.Finance.CSharp.TheGraph
                 { typeof(TokenStatusFilterFilter), "TokenStatusFilter_filter" },
                 { typeof(TokenWithdrawnFilter), "TokenWithdrawn_filter" },
                 { typeof(TotalInvestedFilter), "TotalInvested_filter" },
+                { typeof(TotalUnlocksAmountFilter), "TotalUnlocksAmount_filter" },
                 { typeof(TotalUserInvestedFilter), "TotalUserInvested_filter" },
                 { typeof(TransferFilter), "Transfer_filter" },
                 { typeof(UpdatedMaxDelayFilter), "UpdatedMaxDelay_filter" },
@@ -1884,6 +1892,16 @@ namespace Poolz.Finance.CSharp.TheGraph
         blockTimestamp
     }
 
+    public enum PoolxUnlocksOrderBy
+    {
+        [EnumMember(Value = "id")] Id,
+        poolId,
+        [EnumMember(Value = "owner")] Owner,
+        [EnumMember(Value = "amount")] Amount,
+        createdAt,
+        unlocksAt
+    }
+
     public enum RedeemedTokensOrderBy
     {
         [EnumMember(Value = "id")] Id,
@@ -1987,6 +2005,13 @@ namespace Poolz.Finance.CSharp.TheGraph
         leftAmount
     }
 
+    public enum TotalUnlocksAmountOrderBy
+    {
+        [EnumMember(Value = "id")] Id,
+        totalUnlocksAmount,
+        blockTimestamp
+    }
+
     public enum TotalUserInvestedOrderBy
     {
         [EnumMember(Value = "id")] Id,
@@ -2081,6 +2106,7 @@ namespace Poolz.Finance.CSharp.TheGraph
     {
         [EnumMember(Value = "id")] Id,
         vaultId,
+        vaultAddress,
         [EnumMember(Value = "token")] Token,
         [EnumMember(Value = "balance")] Balance,
         depositStatus,
@@ -5976,6 +6002,84 @@ namespace Poolz.Finance.CSharp.TheGraph
         }
     }
 
+    public partial class PoolxUnlocksQueryBuilder : GraphQlQueryBuilder<PoolxUnlocksQueryBuilder>
+    {
+        private static readonly GraphQlFieldMetadata[] AllFieldMetadata =
+            new []
+            {
+                new GraphQlFieldMetadata { Name = "id" },
+                new GraphQlFieldMetadata { Name = "poolId" },
+                new GraphQlFieldMetadata { Name = "owner" },
+                new GraphQlFieldMetadata { Name = "amount" },
+                new GraphQlFieldMetadata { Name = "createdAt" },
+                new GraphQlFieldMetadata { Name = "unlocksAt" }
+            };
+
+        protected override string TypeName { get { return "PoolxUnlocks"; } } 
+
+        public override IReadOnlyList<GraphQlFieldMetadata> AllFields { get { return AllFieldMetadata; } } 
+
+        public PoolxUnlocksQueryBuilder WithId(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("id", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptId()
+        {
+            return ExceptField("id");
+        }
+
+        public PoolxUnlocksQueryBuilder WithPoolId(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("poolId", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptPoolId()
+        {
+            return ExceptField("poolId");
+        }
+
+        public PoolxUnlocksQueryBuilder WithOwner(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("owner", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptOwner()
+        {
+            return ExceptField("owner");
+        }
+
+        public PoolxUnlocksQueryBuilder WithAmount(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("amount", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptAmount()
+        {
+            return ExceptField("amount");
+        }
+
+        public PoolxUnlocksQueryBuilder WithCreatedAt(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("createdAt", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptCreatedAt()
+        {
+            return ExceptField("createdAt");
+        }
+
+        public PoolxUnlocksQueryBuilder WithUnlocksAt(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("unlocksAt", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public PoolxUnlocksQueryBuilder ExceptUnlocksAt()
+        {
+            return ExceptField("unlocksAt");
+        }
+    }
+
     public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
     {
         private static readonly GraphQlFieldMetadata[] AllFieldMetadata =
@@ -6079,6 +6183,10 @@ namespace Poolz.Finance.CSharp.TheGraph
                 new GraphQlFieldMetadata { Name = "allowedContracts", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(AllowedContractQueryBuilder) },
                 new GraphQlFieldMetadata { Name = "poolxLockedBalance", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolxLockedBalanceQueryBuilder) },
                 new GraphQlFieldMetadata { Name = "poolxLockedBalances", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolxLockedBalanceQueryBuilder) },
+                new GraphQlFieldMetadata { Name = "poolxUnlocks", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolxUnlocksQueryBuilder) },
+                new GraphQlFieldMetadata { Name = "poolxUnlocks_collection", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolxUnlocksQueryBuilder) },
+                new GraphQlFieldMetadata { Name = "totalUnlocksAmount", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TotalUnlocksAmountQueryBuilder) },
+                new GraphQlFieldMetadata { Name = "totalUnlocksAmounts", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TotalUnlocksAmountQueryBuilder) },
                 new GraphQlFieldMetadata { Name = "poolData", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolDataQueryBuilder) },
                 new GraphQlFieldMetadata { Name = "poolDatas", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PoolDataQueryBuilder) },
                 new GraphQlFieldMetadata { Name = "oldDealProviderFirewallAdminUpdated", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(OldDealProviderFirewallAdminUpdatedQueryBuilder) },
@@ -8391,6 +8499,98 @@ namespace Poolz.Finance.CSharp.TheGraph
             return ExceptField("poolxLockedBalances");
         }
 
+        public QueryQueryBuilder WithPoolxUnlocks(PoolxUnlocksQueryBuilder poolxUnlocksQueryBuilder, QueryBuilderParameter<string> id, QueryBuilderParameter<SubgraphErrorPolicy> subgraphError, QueryBuilderParameter<BlockHeight> block = null, string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            var args = new List<QueryBuilderArgumentInfo>();
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "id", ArgumentValue = id} );
+            if (block != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "block", ArgumentValue = block} );
+
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "subgraphError", ArgumentValue = subgraphError} );
+            return WithObjectField("poolxUnlocks", alias, poolxUnlocksQueryBuilder, new GraphQlDirective[] { skip, include }, args);
+        }
+
+        public QueryQueryBuilder ExceptPoolxUnlocks()
+        {
+            return ExceptField("poolxUnlocks");
+        }
+
+        public QueryQueryBuilder WithPoolxUnlocksCollection(PoolxUnlocksQueryBuilder poolxUnlocksQueryBuilder, QueryBuilderParameter<SubgraphErrorPolicy> subgraphError, QueryBuilderParameter<int?> skip = null, QueryBuilderParameter<int?> first = null, QueryBuilderParameter<PoolxUnlocksOrderBy?> orderBy = null, QueryBuilderParameter<OrderDirection?> orderDirection = null, QueryBuilderParameter<PoolxUnlocksFilter> where = null, QueryBuilderParameter<BlockHeight> block = null, string alias = null, SkipDirective skipDirective = null, IncludeDirective include = null)
+        {
+            var args = new List<QueryBuilderArgumentInfo>();
+            if (skip != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "skip", ArgumentValue = skip} );
+
+            if (first != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "first", ArgumentValue = first} );
+
+            if (orderBy != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "orderBy", ArgumentValue = orderBy} );
+
+            if (orderDirection != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "orderDirection", ArgumentValue = orderDirection} );
+
+            if (where != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "where", ArgumentValue = where} );
+
+            if (block != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "block", ArgumentValue = block} );
+
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "subgraphError", ArgumentValue = subgraphError} );
+            return WithObjectField("poolxUnlocks_collection", alias, poolxUnlocksQueryBuilder, new GraphQlDirective[] { skipDirective, include }, args);
+        }
+
+        public QueryQueryBuilder ExceptPoolxUnlocksCollection()
+        {
+            return ExceptField("poolxUnlocks_collection");
+        }
+
+        public QueryQueryBuilder WithTotalUnlocksAmount(TotalUnlocksAmountQueryBuilder totalUnlocksAmountQueryBuilder, QueryBuilderParameter<string> id, QueryBuilderParameter<SubgraphErrorPolicy> subgraphError, QueryBuilderParameter<BlockHeight> block = null, string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            var args = new List<QueryBuilderArgumentInfo>();
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "id", ArgumentValue = id} );
+            if (block != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "block", ArgumentValue = block} );
+
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "subgraphError", ArgumentValue = subgraphError} );
+            return WithObjectField("totalUnlocksAmount", alias, totalUnlocksAmountQueryBuilder, new GraphQlDirective[] { skip, include }, args);
+        }
+
+        public QueryQueryBuilder ExceptTotalUnlocksAmount()
+        {
+            return ExceptField("totalUnlocksAmount");
+        }
+
+        public QueryQueryBuilder WithTotalUnlocksAmounts(TotalUnlocksAmountQueryBuilder totalUnlocksAmountQueryBuilder, QueryBuilderParameter<SubgraphErrorPolicy> subgraphError, QueryBuilderParameter<int?> skip = null, QueryBuilderParameter<int?> first = null, QueryBuilderParameter<TotalUnlocksAmountOrderBy?> orderBy = null, QueryBuilderParameter<OrderDirection?> orderDirection = null, QueryBuilderParameter<TotalUnlocksAmountFilter> where = null, QueryBuilderParameter<BlockHeight> block = null, string alias = null, SkipDirective skipDirective = null, IncludeDirective include = null)
+        {
+            var args = new List<QueryBuilderArgumentInfo>();
+            if (skip != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "skip", ArgumentValue = skip} );
+
+            if (first != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "first", ArgumentValue = first} );
+
+            if (orderBy != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "orderBy", ArgumentValue = orderBy} );
+
+            if (orderDirection != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "orderDirection", ArgumentValue = orderDirection} );
+
+            if (where != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "where", ArgumentValue = where} );
+
+            if (block != null)
+                args.Add(new QueryBuilderArgumentInfo { ArgumentName = "block", ArgumentValue = block} );
+
+            args.Add(new QueryBuilderArgumentInfo { ArgumentName = "subgraphError", ArgumentValue = subgraphError} );
+            return WithObjectField("totalUnlocksAmounts", alias, totalUnlocksAmountQueryBuilder, new GraphQlDirective[] { skipDirective, include }, args);
+        }
+
+        public QueryQueryBuilder ExceptTotalUnlocksAmounts()
+        {
+            return ExceptField("totalUnlocksAmounts");
+        }
+
         public QueryQueryBuilder WithPoolData(PoolDataQueryBuilder poolDataQueryBuilder, QueryBuilderParameter<string> id, QueryBuilderParameter<SubgraphErrorPolicy> subgraphError, QueryBuilderParameter<BlockHeight> block = null, string alias = null, SkipDirective skip = null, IncludeDirective include = null)
         {
             var args = new List<QueryBuilderArgumentInfo>();
@@ -10185,6 +10385,51 @@ namespace Poolz.Finance.CSharp.TheGraph
         }
     }
 
+    public partial class TotalUnlocksAmountQueryBuilder : GraphQlQueryBuilder<TotalUnlocksAmountQueryBuilder>
+    {
+        private static readonly GraphQlFieldMetadata[] AllFieldMetadata =
+            new []
+            {
+                new GraphQlFieldMetadata { Name = "id" },
+                new GraphQlFieldMetadata { Name = "totalUnlocksAmount" },
+                new GraphQlFieldMetadata { Name = "blockTimestamp" }
+            };
+
+        protected override string TypeName { get { return "TotalUnlocksAmount"; } } 
+
+        public override IReadOnlyList<GraphQlFieldMetadata> AllFields { get { return AllFieldMetadata; } } 
+
+        public TotalUnlocksAmountQueryBuilder WithId(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("id", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public TotalUnlocksAmountQueryBuilder ExceptId()
+        {
+            return ExceptField("id");
+        }
+
+        public TotalUnlocksAmountQueryBuilder WithTotalUnlocksAmount(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("totalUnlocksAmount", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public TotalUnlocksAmountQueryBuilder ExceptTotalUnlocksAmount()
+        {
+            return ExceptField("totalUnlocksAmount");
+        }
+
+        public TotalUnlocksAmountQueryBuilder WithBlockTimestamp(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("blockTimestamp", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public TotalUnlocksAmountQueryBuilder ExceptBlockTimestamp()
+        {
+            return ExceptField("blockTimestamp");
+        }
+    }
+
     public partial class TotalUserInvestedQueryBuilder : GraphQlQueryBuilder<TotalUserInvestedQueryBuilder>
     {
         private static readonly GraphQlFieldMetadata[] AllFieldMetadata =
@@ -10615,6 +10860,7 @@ namespace Poolz.Finance.CSharp.TheGraph
             {
                 new GraphQlFieldMetadata { Name = "id" },
                 new GraphQlFieldMetadata { Name = "vaultId" },
+                new GraphQlFieldMetadata { Name = "vaultAddress" },
                 new GraphQlFieldMetadata { Name = "token" },
                 new GraphQlFieldMetadata { Name = "balance" },
                 new GraphQlFieldMetadata { Name = "depositStatus" },
@@ -10645,6 +10891,16 @@ namespace Poolz.Finance.CSharp.TheGraph
         public VaultQueryBuilder ExceptVaultId()
         {
             return ExceptField("vaultId");
+        }
+
+        public VaultQueryBuilder WithVaultAddress(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
+        {
+            return WithScalarField("vaultAddress", alias, new GraphQlDirective[] { skip, include });
+        }
+
+        public VaultQueryBuilder ExceptVaultAddress()
+        {
+            return ExceptField("vaultAddress");
         }
 
         public VaultQueryBuilder WithToken(string alias = null, SkipDirective skip = null, IncludeDirective include = null)
@@ -44845,6 +45101,642 @@ namespace Poolz.Finance.CSharp.TheGraph
         }
     }
 
+    public partial class PoolxUnlocksFilter : IGraphQlInputObject
+    {
+        private InputPropertyInfo _id;
+        private InputPropertyInfo _idNot;
+        private InputPropertyInfo _idGt;
+        private InputPropertyInfo _idLt;
+        private InputPropertyInfo _idGte;
+        private InputPropertyInfo _idLte;
+        private InputPropertyInfo _idIn;
+        private InputPropertyInfo _idNotIn;
+        private InputPropertyInfo _poolId;
+        private InputPropertyInfo _poolIdNot;
+        private InputPropertyInfo _poolIdGt;
+        private InputPropertyInfo _poolIdLt;
+        private InputPropertyInfo _poolIdGte;
+        private InputPropertyInfo _poolIdLte;
+        private InputPropertyInfo _poolIdIn;
+        private InputPropertyInfo _poolIdNotIn;
+        private InputPropertyInfo _owner;
+        private InputPropertyInfo _ownerNot;
+        private InputPropertyInfo _ownerGt;
+        private InputPropertyInfo _ownerLt;
+        private InputPropertyInfo _ownerGte;
+        private InputPropertyInfo _ownerLte;
+        private InputPropertyInfo _ownerIn;
+        private InputPropertyInfo _ownerNotIn;
+        private InputPropertyInfo _ownerContains;
+        private InputPropertyInfo _ownerNotContains;
+        private InputPropertyInfo _amount;
+        private InputPropertyInfo _amountNot;
+        private InputPropertyInfo _amountGt;
+        private InputPropertyInfo _amountLt;
+        private InputPropertyInfo _amountGte;
+        private InputPropertyInfo _amountLte;
+        private InputPropertyInfo _amountIn;
+        private InputPropertyInfo _amountNotIn;
+        private InputPropertyInfo _createdAt;
+        private InputPropertyInfo _createdAtNot;
+        private InputPropertyInfo _createdAtGt;
+        private InputPropertyInfo _createdAtLt;
+        private InputPropertyInfo _createdAtGte;
+        private InputPropertyInfo _createdAtLte;
+        private InputPropertyInfo _createdAtIn;
+        private InputPropertyInfo _createdAtNotIn;
+        private InputPropertyInfo _unlocksAt;
+        private InputPropertyInfo _unlocksAtNot;
+        private InputPropertyInfo _unlocksAtGt;
+        private InputPropertyInfo _unlocksAtLt;
+        private InputPropertyInfo _unlocksAtGte;
+        private InputPropertyInfo _unlocksAtLte;
+        private InputPropertyInfo _unlocksAtIn;
+        private InputPropertyInfo _unlocksAtNotIn;
+        private InputPropertyInfo _changeBlock;
+        private InputPropertyInfo _and;
+        private InputPropertyInfo _or;
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> Id
+        {
+            get { return (QueryBuilderParameter<string>)_id.Value; }
+            set { _id = new InputPropertyInfo { Name = "id", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdNot
+        {
+            get { return (QueryBuilderParameter<string>)_idNot.Value; }
+            set { _idNot = new InputPropertyInfo { Name = "id_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdGt
+        {
+            get { return (QueryBuilderParameter<string>)_idGt.Value; }
+            set { _idGt = new InputPropertyInfo { Name = "id_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdLt
+        {
+            get { return (QueryBuilderParameter<string>)_idLt.Value; }
+            set { _idLt = new InputPropertyInfo { Name = "id_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdGte
+        {
+            get { return (QueryBuilderParameter<string>)_idGte.Value; }
+            set { _idGte = new InputPropertyInfo { Name = "id_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdLte
+        {
+            get { return (QueryBuilderParameter<string>)_idLte.Value; }
+            set { _idLte = new InputPropertyInfo { Name = "id_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> IdIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_idIn.Value; }
+            set { _idIn = new InputPropertyInfo { Name = "id_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> IdNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_idNotIn.Value; }
+            set { _idNotIn = new InputPropertyInfo { Name = "id_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolId
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolId.Value; }
+            set { _poolId = new InputPropertyInfo { Name = "poolId", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolIdNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolIdNot.Value; }
+            set { _poolIdNot = new InputPropertyInfo { Name = "poolId_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolIdGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolIdGt.Value; }
+            set { _poolIdGt = new InputPropertyInfo { Name = "poolId_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolIdLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolIdLt.Value; }
+            set { _poolIdLt = new InputPropertyInfo { Name = "poolId_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolIdGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolIdGte.Value; }
+            set { _poolIdGte = new InputPropertyInfo { Name = "poolId_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> PoolIdLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_poolIdLte.Value; }
+            set { _poolIdLte = new InputPropertyInfo { Name = "poolId_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> PoolIdIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_poolIdIn.Value; }
+            set { _poolIdIn = new InputPropertyInfo { Name = "poolId_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolId_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> PoolIdNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_poolIdNotIn.Value; }
+            set { _poolIdNotIn = new InputPropertyInfo { Name = "poolId_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> Owner
+        {
+            get { return (QueryBuilderParameter<string>)_owner.Value; }
+            set { _owner = new InputPropertyInfo { Name = "owner", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerNot
+        {
+            get { return (QueryBuilderParameter<string>)_ownerNot.Value; }
+            set { _ownerNot = new InputPropertyInfo { Name = "owner_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerGt
+        {
+            get { return (QueryBuilderParameter<string>)_ownerGt.Value; }
+            set { _ownerGt = new InputPropertyInfo { Name = "owner_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerLt
+        {
+            get { return (QueryBuilderParameter<string>)_ownerLt.Value; }
+            set { _ownerLt = new InputPropertyInfo { Name = "owner_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerGte
+        {
+            get { return (QueryBuilderParameter<string>)_ownerGte.Value; }
+            set { _ownerGte = new InputPropertyInfo { Name = "owner_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerLte
+        {
+            get { return (QueryBuilderParameter<string>)_ownerLte.Value; }
+            set { _ownerLte = new InputPropertyInfo { Name = "owner_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> OwnerIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_ownerIn.Value; }
+            set { _ownerIn = new InputPropertyInfo { Name = "owner_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> OwnerNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_ownerNotIn.Value; }
+            set { _ownerNotIn = new InputPropertyInfo { Name = "owner_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_contains")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerContains
+        {
+            get { return (QueryBuilderParameter<string>)_ownerContains.Value; }
+            set { _ownerContains = new InputPropertyInfo { Name = "owner_contains", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("owner_not_contains")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> OwnerNotContains
+        {
+            get { return (QueryBuilderParameter<string>)_ownerNotContains.Value; }
+            set { _ownerNotContains = new InputPropertyInfo { Name = "owner_not_contains", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> Amount
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amount.Value; }
+            set { _amount = new InputPropertyInfo { Name = "amount", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> AmountNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amountNot.Value; }
+            set { _amountNot = new InputPropertyInfo { Name = "amount_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> AmountGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amountGt.Value; }
+            set { _amountGt = new InputPropertyInfo { Name = "amount_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> AmountLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amountLt.Value; }
+            set { _amountLt = new InputPropertyInfo { Name = "amount_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> AmountGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amountGte.Value; }
+            set { _amountGte = new InputPropertyInfo { Name = "amount_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> AmountLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_amountLte.Value; }
+            set { _amountLte = new InputPropertyInfo { Name = "amount_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> AmountIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_amountIn.Value; }
+            set { _amountIn = new InputPropertyInfo { Name = "amount_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("amount_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> AmountNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_amountNotIn.Value; }
+            set { _amountNotIn = new InputPropertyInfo { Name = "amount_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAt.Value; }
+            set { _createdAt = new InputPropertyInfo { Name = "createdAt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAtNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAtNot.Value; }
+            set { _createdAtNot = new InputPropertyInfo { Name = "createdAt_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAtGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAtGt.Value; }
+            set { _createdAtGt = new InputPropertyInfo { Name = "createdAt_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAtLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAtLt.Value; }
+            set { _createdAtLt = new InputPropertyInfo { Name = "createdAt_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAtGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAtGte.Value; }
+            set { _createdAtGte = new InputPropertyInfo { Name = "createdAt_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> CreatedAtLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_createdAtLte.Value; }
+            set { _createdAtLte = new InputPropertyInfo { Name = "createdAt_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> CreatedAtIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_createdAtIn.Value; }
+            set { _createdAtIn = new InputPropertyInfo { Name = "createdAt_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("createdAt_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> CreatedAtNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_createdAtNotIn.Value; }
+            set { _createdAtNotIn = new InputPropertyInfo { Name = "createdAt_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAt.Value; }
+            set { _unlocksAt = new InputPropertyInfo { Name = "unlocksAt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAtNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAtNot.Value; }
+            set { _unlocksAtNot = new InputPropertyInfo { Name = "unlocksAt_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAtGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAtGt.Value; }
+            set { _unlocksAtGt = new InputPropertyInfo { Name = "unlocksAt_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAtLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAtLt.Value; }
+            set { _unlocksAtLt = new InputPropertyInfo { Name = "unlocksAt_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAtGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAtGte.Value; }
+            set { _unlocksAtGte = new InputPropertyInfo { Name = "unlocksAt_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> UnlocksAtLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_unlocksAtLte.Value; }
+            set { _unlocksAtLte = new InputPropertyInfo { Name = "unlocksAt_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> UnlocksAtIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_unlocksAtIn.Value; }
+            set { _unlocksAtIn = new InputPropertyInfo { Name = "unlocksAt_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("unlocksAt_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> UnlocksAtNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_unlocksAtNotIn.Value; }
+            set { _unlocksAtNotIn = new InputPropertyInfo { Name = "unlocksAt_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("_change_block")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<BlockChangedFilter>))]
+        #endif
+        public QueryBuilderParameter<BlockChangedFilter> ChangeBlock
+        {
+            get { return (QueryBuilderParameter<BlockChangedFilter>)_changeBlock.Value; }
+            set { _changeBlock = new InputPropertyInfo { Name = "_change_block", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<PoolxUnlocksFilter>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<PoolxUnlocksFilter>> And
+        {
+            get { return (QueryBuilderParameter<ICollection<PoolxUnlocksFilter>>)_and.Value; }
+            set { _and = new InputPropertyInfo { Name = "and", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<PoolxUnlocksFilter>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<PoolxUnlocksFilter>> Or
+        {
+            get { return (QueryBuilderParameter<ICollection<PoolxUnlocksFilter>>)_or.Value; }
+            set { _or = new InputPropertyInfo { Name = "or", Value = value }; }
+        }
+
+        IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
+        {
+            if (_id.Name != null) yield return _id;
+            if (_idNot.Name != null) yield return _idNot;
+            if (_idGt.Name != null) yield return _idGt;
+            if (_idLt.Name != null) yield return _idLt;
+            if (_idGte.Name != null) yield return _idGte;
+            if (_idLte.Name != null) yield return _idLte;
+            if (_idIn.Name != null) yield return _idIn;
+            if (_idNotIn.Name != null) yield return _idNotIn;
+            if (_poolId.Name != null) yield return _poolId;
+            if (_poolIdNot.Name != null) yield return _poolIdNot;
+            if (_poolIdGt.Name != null) yield return _poolIdGt;
+            if (_poolIdLt.Name != null) yield return _poolIdLt;
+            if (_poolIdGte.Name != null) yield return _poolIdGte;
+            if (_poolIdLte.Name != null) yield return _poolIdLte;
+            if (_poolIdIn.Name != null) yield return _poolIdIn;
+            if (_poolIdNotIn.Name != null) yield return _poolIdNotIn;
+            if (_owner.Name != null) yield return _owner;
+            if (_ownerNot.Name != null) yield return _ownerNot;
+            if (_ownerGt.Name != null) yield return _ownerGt;
+            if (_ownerLt.Name != null) yield return _ownerLt;
+            if (_ownerGte.Name != null) yield return _ownerGte;
+            if (_ownerLte.Name != null) yield return _ownerLte;
+            if (_ownerIn.Name != null) yield return _ownerIn;
+            if (_ownerNotIn.Name != null) yield return _ownerNotIn;
+            if (_ownerContains.Name != null) yield return _ownerContains;
+            if (_ownerNotContains.Name != null) yield return _ownerNotContains;
+            if (_amount.Name != null) yield return _amount;
+            if (_amountNot.Name != null) yield return _amountNot;
+            if (_amountGt.Name != null) yield return _amountGt;
+            if (_amountLt.Name != null) yield return _amountLt;
+            if (_amountGte.Name != null) yield return _amountGte;
+            if (_amountLte.Name != null) yield return _amountLte;
+            if (_amountIn.Name != null) yield return _amountIn;
+            if (_amountNotIn.Name != null) yield return _amountNotIn;
+            if (_createdAt.Name != null) yield return _createdAt;
+            if (_createdAtNot.Name != null) yield return _createdAtNot;
+            if (_createdAtGt.Name != null) yield return _createdAtGt;
+            if (_createdAtLt.Name != null) yield return _createdAtLt;
+            if (_createdAtGte.Name != null) yield return _createdAtGte;
+            if (_createdAtLte.Name != null) yield return _createdAtLte;
+            if (_createdAtIn.Name != null) yield return _createdAtIn;
+            if (_createdAtNotIn.Name != null) yield return _createdAtNotIn;
+            if (_unlocksAt.Name != null) yield return _unlocksAt;
+            if (_unlocksAtNot.Name != null) yield return _unlocksAtNot;
+            if (_unlocksAtGt.Name != null) yield return _unlocksAtGt;
+            if (_unlocksAtLt.Name != null) yield return _unlocksAtLt;
+            if (_unlocksAtGte.Name != null) yield return _unlocksAtGte;
+            if (_unlocksAtLte.Name != null) yield return _unlocksAtLte;
+            if (_unlocksAtIn.Name != null) yield return _unlocksAtIn;
+            if (_unlocksAtNotIn.Name != null) yield return _unlocksAtNotIn;
+            if (_changeBlock.Name != null) yield return _changeBlock;
+            if (_and.Name != null) yield return _and;
+            if (_or.Name != null) yield return _or;
+        }
+    }
+
     public partial class RedeemedTokensFilter : IGraphQlInputObject
     {
         private InputPropertyInfo _id;
@@ -51730,6 +52622,333 @@ namespace Poolz.Finance.CSharp.TheGraph
         }
     }
 
+    public partial class TotalUnlocksAmountFilter : IGraphQlInputObject
+    {
+        private InputPropertyInfo _id;
+        private InputPropertyInfo _idNot;
+        private InputPropertyInfo _idGt;
+        private InputPropertyInfo _idLt;
+        private InputPropertyInfo _idGte;
+        private InputPropertyInfo _idLte;
+        private InputPropertyInfo _idIn;
+        private InputPropertyInfo _idNotIn;
+        private InputPropertyInfo _totalUnlocksAmount;
+        private InputPropertyInfo _totalUnlocksAmountNot;
+        private InputPropertyInfo _totalUnlocksAmountGt;
+        private InputPropertyInfo _totalUnlocksAmountLt;
+        private InputPropertyInfo _totalUnlocksAmountGte;
+        private InputPropertyInfo _totalUnlocksAmountLte;
+        private InputPropertyInfo _totalUnlocksAmountIn;
+        private InputPropertyInfo _totalUnlocksAmountNotIn;
+        private InputPropertyInfo _blockTimestamp;
+        private InputPropertyInfo _blockTimestampNot;
+        private InputPropertyInfo _blockTimestampGt;
+        private InputPropertyInfo _blockTimestampLt;
+        private InputPropertyInfo _blockTimestampGte;
+        private InputPropertyInfo _blockTimestampLte;
+        private InputPropertyInfo _blockTimestampIn;
+        private InputPropertyInfo _blockTimestampNotIn;
+        private InputPropertyInfo _changeBlock;
+        private InputPropertyInfo _and;
+        private InputPropertyInfo _or;
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> Id
+        {
+            get { return (QueryBuilderParameter<string>)_id.Value; }
+            set { _id = new InputPropertyInfo { Name = "id", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdNot
+        {
+            get { return (QueryBuilderParameter<string>)_idNot.Value; }
+            set { _idNot = new InputPropertyInfo { Name = "id_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdGt
+        {
+            get { return (QueryBuilderParameter<string>)_idGt.Value; }
+            set { _idGt = new InputPropertyInfo { Name = "id_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdLt
+        {
+            get { return (QueryBuilderParameter<string>)_idLt.Value; }
+            set { _idLt = new InputPropertyInfo { Name = "id_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdGte
+        {
+            get { return (QueryBuilderParameter<string>)_idGte.Value; }
+            set { _idGte = new InputPropertyInfo { Name = "id_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> IdLte
+        {
+            get { return (QueryBuilderParameter<string>)_idLte.Value; }
+            set { _idLte = new InputPropertyInfo { Name = "id_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> IdIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_idIn.Value; }
+            set { _idIn = new InputPropertyInfo { Name = "id_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("id_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> IdNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_idNotIn.Value; }
+            set { _idNotIn = new InputPropertyInfo { Name = "id_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmount
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmount.Value; }
+            set { _totalUnlocksAmount = new InputPropertyInfo { Name = "totalUnlocksAmount", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmountNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmountNot.Value; }
+            set { _totalUnlocksAmountNot = new InputPropertyInfo { Name = "totalUnlocksAmount_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmountGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmountGt.Value; }
+            set { _totalUnlocksAmountGt = new InputPropertyInfo { Name = "totalUnlocksAmount_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmountLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmountLt.Value; }
+            set { _totalUnlocksAmountLt = new InputPropertyInfo { Name = "totalUnlocksAmount_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmountGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmountGte.Value; }
+            set { _totalUnlocksAmountGte = new InputPropertyInfo { Name = "totalUnlocksAmount_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> TotalUnlocksAmountLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_totalUnlocksAmountLte.Value; }
+            set { _totalUnlocksAmountLte = new InputPropertyInfo { Name = "totalUnlocksAmount_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> TotalUnlocksAmountIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_totalUnlocksAmountIn.Value; }
+            set { _totalUnlocksAmountIn = new InputPropertyInfo { Name = "totalUnlocksAmount_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("totalUnlocksAmount_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> TotalUnlocksAmountNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_totalUnlocksAmountNotIn.Value; }
+            set { _totalUnlocksAmountNotIn = new InputPropertyInfo { Name = "totalUnlocksAmount_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestamp
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestamp.Value; }
+            set { _blockTimestamp = new InputPropertyInfo { Name = "blockTimestamp", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestampNot
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestampNot.Value; }
+            set { _blockTimestampNot = new InputPropertyInfo { Name = "blockTimestamp_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestampGt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestampGt.Value; }
+            set { _blockTimestampGt = new InputPropertyInfo { Name = "blockTimestamp_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestampLt
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestampLt.Value; }
+            set { _blockTimestampLt = new InputPropertyInfo { Name = "blockTimestamp_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestampGte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestampGte.Value; }
+            set { _blockTimestampGte = new InputPropertyInfo { Name = "blockTimestamp_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<System.Numerics.BigInteger?>))]
+        #endif
+        public QueryBuilderParameter<System.Numerics.BigInteger?> BlockTimestampLte
+        {
+            get { return (QueryBuilderParameter<System.Numerics.BigInteger?>)_blockTimestampLte.Value; }
+            set { _blockTimestampLte = new InputPropertyInfo { Name = "blockTimestamp_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> BlockTimestampIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_blockTimestampIn.Value; }
+            set { _blockTimestampIn = new InputPropertyInfo { Name = "blockTimestamp_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("blockTimestamp_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<System.Numerics.BigInteger>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<System.Numerics.BigInteger>> BlockTimestampNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_blockTimestampNotIn.Value; }
+            set { _blockTimestampNotIn = new InputPropertyInfo { Name = "blockTimestamp_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("_change_block")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<BlockChangedFilter>))]
+        #endif
+        public QueryBuilderParameter<BlockChangedFilter> ChangeBlock
+        {
+            get { return (QueryBuilderParameter<BlockChangedFilter>)_changeBlock.Value; }
+            set { _changeBlock = new InputPropertyInfo { Name = "_change_block", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<TotalUnlocksAmountFilter>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<TotalUnlocksAmountFilter>> And
+        {
+            get { return (QueryBuilderParameter<ICollection<TotalUnlocksAmountFilter>>)_and.Value; }
+            set { _and = new InputPropertyInfo { Name = "and", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<TotalUnlocksAmountFilter>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<TotalUnlocksAmountFilter>> Or
+        {
+            get { return (QueryBuilderParameter<ICollection<TotalUnlocksAmountFilter>>)_or.Value; }
+            set { _or = new InputPropertyInfo { Name = "or", Value = value }; }
+        }
+
+        IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
+        {
+            if (_id.Name != null) yield return _id;
+            if (_idNot.Name != null) yield return _idNot;
+            if (_idGt.Name != null) yield return _idGt;
+            if (_idLt.Name != null) yield return _idLt;
+            if (_idGte.Name != null) yield return _idGte;
+            if (_idLte.Name != null) yield return _idLte;
+            if (_idIn.Name != null) yield return _idIn;
+            if (_idNotIn.Name != null) yield return _idNotIn;
+            if (_totalUnlocksAmount.Name != null) yield return _totalUnlocksAmount;
+            if (_totalUnlocksAmountNot.Name != null) yield return _totalUnlocksAmountNot;
+            if (_totalUnlocksAmountGt.Name != null) yield return _totalUnlocksAmountGt;
+            if (_totalUnlocksAmountLt.Name != null) yield return _totalUnlocksAmountLt;
+            if (_totalUnlocksAmountGte.Name != null) yield return _totalUnlocksAmountGte;
+            if (_totalUnlocksAmountLte.Name != null) yield return _totalUnlocksAmountLte;
+            if (_totalUnlocksAmountIn.Name != null) yield return _totalUnlocksAmountIn;
+            if (_totalUnlocksAmountNotIn.Name != null) yield return _totalUnlocksAmountNotIn;
+            if (_blockTimestamp.Name != null) yield return _blockTimestamp;
+            if (_blockTimestampNot.Name != null) yield return _blockTimestampNot;
+            if (_blockTimestampGt.Name != null) yield return _blockTimestampGt;
+            if (_blockTimestampLt.Name != null) yield return _blockTimestampLt;
+            if (_blockTimestampGte.Name != null) yield return _blockTimestampGte;
+            if (_blockTimestampLte.Name != null) yield return _blockTimestampLte;
+            if (_blockTimestampIn.Name != null) yield return _blockTimestampIn;
+            if (_blockTimestampNotIn.Name != null) yield return _blockTimestampNotIn;
+            if (_changeBlock.Name != null) yield return _changeBlock;
+            if (_and.Name != null) yield return _and;
+            if (_or.Name != null) yield return _or;
+        }
+    }
+
     public partial class TotalUserInvestedFilter : IGraphQlInputObject
     {
         private InputPropertyInfo _id;
@@ -57906,6 +59125,16 @@ namespace Poolz.Finance.CSharp.TheGraph
         private InputPropertyInfo _vaultIdLte;
         private InputPropertyInfo _vaultIdIn;
         private InputPropertyInfo _vaultIdNotIn;
+        private InputPropertyInfo _vaultAddress;
+        private InputPropertyInfo _vaultAddressNot;
+        private InputPropertyInfo _vaultAddressGt;
+        private InputPropertyInfo _vaultAddressLt;
+        private InputPropertyInfo _vaultAddressGte;
+        private InputPropertyInfo _vaultAddressLte;
+        private InputPropertyInfo _vaultAddressIn;
+        private InputPropertyInfo _vaultAddressNotIn;
+        private InputPropertyInfo _vaultAddressContains;
+        private InputPropertyInfo _vaultAddressNotContains;
         private InputPropertyInfo _token;
         private InputPropertyInfo _tokenNot;
         private InputPropertyInfo _tokenGt;
@@ -58110,6 +59339,105 @@ namespace Poolz.Finance.CSharp.TheGraph
         {
             get { return (QueryBuilderParameter<ICollection<System.Numerics.BigInteger>>)_vaultIdNotIn.Value; }
             set { _vaultIdNotIn = new InputPropertyInfo { Name = "vaultId_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddress
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddress.Value; }
+            set { _vaultAddress = new InputPropertyInfo { Name = "vaultAddress", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_not")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressNot
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressNot.Value; }
+            set { _vaultAddressNot = new InputPropertyInfo { Name = "vaultAddress_not", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_gt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressGt
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressGt.Value; }
+            set { _vaultAddressGt = new InputPropertyInfo { Name = "vaultAddress_gt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_lt")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressLt
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressLt.Value; }
+            set { _vaultAddressLt = new InputPropertyInfo { Name = "vaultAddress_lt", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_gte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressGte
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressGte.Value; }
+            set { _vaultAddressGte = new InputPropertyInfo { Name = "vaultAddress_gte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_lte")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressLte
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressLte.Value; }
+            set { _vaultAddressLte = new InputPropertyInfo { Name = "vaultAddress_lte", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> VaultAddressIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_vaultAddressIn.Value; }
+            set { _vaultAddressIn = new InputPropertyInfo { Name = "vaultAddress_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_not_in")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<string>>))]
+        #endif
+        public QueryBuilderParameter<ICollection<string>> VaultAddressNotIn
+        {
+            get { return (QueryBuilderParameter<ICollection<string>>)_vaultAddressNotIn.Value; }
+            set { _vaultAddressNotIn = new InputPropertyInfo { Name = "vaultAddress_not_in", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_contains")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressContains
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressContains.Value; }
+            set { _vaultAddressContains = new InputPropertyInfo { Name = "vaultAddress_contains", Value = value }; }
+        }
+
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("vaultAddress_not_contains")]
+        [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
+        #endif
+        public QueryBuilderParameter<string> VaultAddressNotContains
+        {
+            get { return (QueryBuilderParameter<string>)_vaultAddressNotContains.Value; }
+            set { _vaultAddressNotContains = new InputPropertyInfo { Name = "vaultAddress_not_contains", Value = value }; }
         }
 
         #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
@@ -58592,6 +59920,16 @@ namespace Poolz.Finance.CSharp.TheGraph
             if (_vaultIdLte.Name != null) yield return _vaultIdLte;
             if (_vaultIdIn.Name != null) yield return _vaultIdIn;
             if (_vaultIdNotIn.Name != null) yield return _vaultIdNotIn;
+            if (_vaultAddress.Name != null) yield return _vaultAddress;
+            if (_vaultAddressNot.Name != null) yield return _vaultAddressNot;
+            if (_vaultAddressGt.Name != null) yield return _vaultAddressGt;
+            if (_vaultAddressLt.Name != null) yield return _vaultAddressLt;
+            if (_vaultAddressGte.Name != null) yield return _vaultAddressGte;
+            if (_vaultAddressLte.Name != null) yield return _vaultAddressLte;
+            if (_vaultAddressIn.Name != null) yield return _vaultAddressIn;
+            if (_vaultAddressNotIn.Name != null) yield return _vaultAddressNotIn;
+            if (_vaultAddressContains.Name != null) yield return _vaultAddressContains;
+            if (_vaultAddressNotContains.Name != null) yield return _vaultAddressNotContains;
             if (_token.Name != null) yield return _token;
             if (_tokenNot.Name != null) yield return _tokenNot;
             if (_tokenGt.Name != null) yield return _tokenGt;
@@ -60045,6 +61383,16 @@ namespace Poolz.Finance.CSharp.TheGraph
         public System.Numerics.BigInteger? BlockTimestamp { get; set; }
     }
 
+    public partial class PoolxUnlocks
+    {
+        public string Id { get; set; }
+        public System.Numerics.BigInteger? PoolId { get; set; }
+        public string Owner { get; set; }
+        public System.Numerics.BigInteger? Amount { get; set; }
+        public System.Numerics.BigInteger? CreatedAt { get; set; }
+        public System.Numerics.BigInteger? UnlocksAt { get; set; }
+    }
+
     public partial class Query
     {
         public GovernorUpdated GovernorUpdated { get; set; }
@@ -60166,6 +61514,13 @@ namespace Poolz.Finance.CSharp.TheGraph
         public ICollection<AllowedContract> AllowedContracts { get; set; }
         public PoolxLockedBalance PoolxLockedBalance { get; set; }
         public ICollection<PoolxLockedBalance> PoolxLockedBalances { get; set; }
+        public PoolxUnlocks PoolxUnlocks { get; set; }
+        #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+        [JsonProperty("poolxUnlocks_collection")]
+        #endif
+        public ICollection<PoolxUnlocks> PoolxUnlocksCollection { get; set; }
+        public TotalUnlocksAmountData TotalUnlocksAmount { get; set; }
+        public ICollection<TotalUnlocksAmountData> TotalUnlocksAmounts { get; set; }
         public PoolData PoolData { get; set; }
         public ICollection<PoolData> PoolDatas { get; set; }
         public OldDealProviderFirewallAdminUpdated OldDealProviderFirewallAdminUpdated { get; set; }
@@ -60335,6 +61690,13 @@ namespace Poolz.Finance.CSharp.TheGraph
         public System.Numerics.BigInteger? LeftAmount { get; set; }
     }
 
+    public partial class TotalUnlocksAmountData
+    {
+        public string Id { get; set; }
+        public System.Numerics.BigInteger? TotalUnlocksAmount { get; set; }
+        public System.Numerics.BigInteger? BlockTimestamp { get; set; }
+    }
+
     public partial class TotalUserInvested
     {
         public string Id { get; set; }
@@ -60392,6 +61754,7 @@ namespace Poolz.Finance.CSharp.TheGraph
     {
         public string Id { get; set; }
         public System.Numerics.BigInteger? VaultId { get; set; }
+        public string VaultAddress { get; set; }
         public string Token { get; set; }
         public System.Numerics.BigInteger? Balance { get; set; }
         public bool? DepositStatus { get; set; }
