@@ -1,0 +1,55 @@
+name: Codegen
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  GRAPHQL_STRAPI_URL: ${{ secrets.GRAPHQL_URL }}
+  TARGET_NAMESPACE:  'Poolz.Finance.CSharp.TheGraph'
+  GENERATED_FILE_PATH: 'src/Poolz.Finance.CSharp.TheGraph/TheGraphClient.cs'
+  CODEGEN_PROJECT: 'src/Poolz.Finance.CSharp.TheGraph.Generator/Poolz.Finance.CSharp.TheGraph.Generator.csproj'
+
+jobs:
+  codegen:
+    if: startsWith(github.event.issue.title, 'Codegen')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore & build
+        run: dotnet build "${{ env.CODEGEN_PROJECT }}" --configuration Release
+
+      - name: Run GraphQL code generator
+        run: dotnet run --project "${{ env.CODEGEN_PROJECT }}" --configuration Release
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          base:  master
+          branch: codegen/${{ github.run_id }}
+          commit-message: "Update generated TheGraph client"
+          body: |
+            Closes #${{ github.event.issue.number }}
