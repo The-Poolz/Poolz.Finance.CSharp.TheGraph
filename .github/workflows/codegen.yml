@@ -8,7 +8,7 @@ permissions:
   pull-requests: write
 
 env:
-  GRAPHQL_STRAPI_URL: ${{ secrets.GRAPHQL_URL }}
+  GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
   TARGET_NAMESPACE:  'Poolz.Finance.CSharp.TheGraph'
   GENERATED_FILE_PATH: 'src/Poolz.Finance.CSharp.TheGraph/TheGraphClient.cs'
   CODEGEN_PROJECT: 'src/Poolz.Finance.CSharp.TheGraph.Generator/Poolz.Finance.CSharp.TheGraph.Generator.csproj'
